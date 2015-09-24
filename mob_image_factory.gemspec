@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version     = '0.0.1'
   s.date        = '2015-09-24'
   s.summary     = "Mobile OS Image Convertor"
-  s.executables = ["bin/mob_image_factory"]
+  s.executables = ["mob_image_factory"]
   s.description = "Convert an image to all required sizes for iOS and Android"
   s.authors     = ["Mike Howson"]
   s.email       = 'mike.howson@p4innovation.com'

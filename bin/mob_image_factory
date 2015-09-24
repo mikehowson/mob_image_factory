@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
 require 'mob_image_factory'
 
-puts MobImageFactory.new.usage
+mif = MobImageFactory.new(ARGV)
+puts mif.produce
