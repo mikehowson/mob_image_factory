@@ -4,27 +4,30 @@ class MobImageFactory
   end
 
   def produce
-    if @args.empty?
+    if @args.empty? || @args.size < 2
       return usage
     end
-    @infilename = @args[0]
-    @outfilename = @args[1].nil? ? @infilename : @args[1]
+    @type = @args[0]
+    @infilename = @args[1]
+    @outfilename = @args[2].nil? ? @infilename : @args[2]
 
     system "identify #{@infilename}"
 
-    #Android App icons
-    convert 192, "android", "xxxhdpi"
-    convert 144, "android", "xxhdpi"
-    convert 96, "android", "xhdpi"
-    convert 72, "android", "hdpi"
-    convert 48, "android", "mdpi"
-
-    #Android Notification icons
-    convert_greyscale 96, "android", "xxxhdpi", "notification_"
-    convert_greyscale 72, "android", "xxhdpi", "notification_"
-    convert_greyscale 48, "android", "xhdpi", "notification_"
-    convert_greyscale 36, "android", "hdpi", "notification_"
-    convert_greyscale 24, "android", "mdpi", "notification_"
+    if @type == 'android_icon'
+      #Android App icons
+      convert 192, "android", "xxxhdpi"
+      convert 144, "android", "xxhdpi"
+      convert 96, "android", "xhdpi"
+      convert 72, "android", "hdpi"
+      convert 48, "android", "mdpi"
+    elsif @type == 'android_notification_icon'
+      #Android Notification icons
+      convert_greyscale 96, "android", "xxxhdpi"
+      convert_greyscale 72, "android", "xxhdpi"
+      convert_greyscale 48, "android", "xhdpi"
+      convert_greyscale 36, "android", "hdpi"
+      convert_greyscale 24, "android", "mdpi"
+    end
 
     "Done"
   end
@@ -38,9 +41,13 @@ private
     system "mkdir #{platform}"
     system "mkdir #{platform}/#{folder}"
     system "convert #{@infilename} #{extra_cmd_options} -resize #{size}x#{size} #{platform}/#{folder}/#{filename_prepend}#{@outfilename}"
+    puts "convert #{@infilename} #{extra_cmd_options} -resize #{size}x#{size} #{platform}/#{folder}/#{filename_prepend}#{@outfilename}"
   end
 
   def usage
-    "Usage: mob_image_factory <filename> <optional_output_filename>"
+    "\n"+
+    "Usage: mob_image_factory convert_type <filename> <optional_output_filename>\n\n"+
+    "convert_types: android, android_icon, android_notification_icon"+
+    "\n\n"
   end
 end
