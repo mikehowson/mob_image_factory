@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'mob_image_factory'
+
+puts MobImageFactory.new.usage
