@@ -2,6 +2,12 @@
 
 A gem to convert images to mobile platform required sizes.
 
+Install
+
+```
+gem install mob_image_factory
+```
+
 Usage
 
 ```

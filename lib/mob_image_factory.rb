@@ -27,6 +27,8 @@ class MobImageFactory
       convert_greyscale 48, "android", "xhdpi"
       convert_greyscale 36, "android", "hdpi"
       convert_greyscale 24, "android", "mdpi"
+    else
+      return usage
     end
 
     "Done"
@@ -47,7 +49,7 @@ private
   def usage
     "\n"+
     "Usage: mob_image_factory convert_type <filename> <optional_output_filename>\n\n"+
-    "convert_types: android, android_icon, android_notification_icon"+
+    "convert_types: android_icon, android_notification_icon"+
     "\n\n"
   end
 end
